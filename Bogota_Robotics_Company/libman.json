@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "mdbootstrap@4.7.5",
+      "destination": "wwwroot/lib/mdbootstrap/"
+    },
+    {
+      "library": "font-awesome@5.8.1",
+      "destination": "wwwroot/lib/font-awesome/"
+    }
+  ]
+}
