@@ -10,7 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Bogota_Robotics_Company.Services;
-
+using Bogota_Robotics_Company.Data;
+using Microsoft.EntityFrameworkCore;
 namespace Bogota_Robotics_Company
 {
     public class Startup
@@ -35,6 +36,7 @@ namespace Bogota_Robotics_Company
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSingleton<IProfileService, TestProfileService>();
+            services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("ApplicationDb")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

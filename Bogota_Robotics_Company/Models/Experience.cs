@@ -7,6 +7,7 @@ namespace Bogota_Robotics_Company.Models
 {
     public class Experience
     {
+        public int ID { get; set; }
         public string CompanyName { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

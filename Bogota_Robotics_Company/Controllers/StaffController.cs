@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Bogota_Robotics_Company.Services;
+using Bogota_Robotics_Company.Models;
 
 namespace Bogota_Robotics_Company.Controllers
 {
@@ -19,7 +20,11 @@ namespace Bogota_Robotics_Company.Controllers
         public async Task<ActionResult> Index()
         {
             var items =await _profileService.GetAsyncProfiles();
-            return View();
+            var model = new ProfileViewModel()
+            {
+                Profiles = items
+            };
+            return View(model);
         }
 
         // GET: Staff/Details/5
