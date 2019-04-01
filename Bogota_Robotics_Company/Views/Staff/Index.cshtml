@@ -1,4 +1,6 @@
 ﻿
+@using Bogota_Robotics_Company.Models
+@model ProfileViewModel
 @{
     ViewData["Title"] = "Staff";
 }
@@ -24,14 +26,13 @@
 
             <!--Title-->
             <h4 class="card-title">Karolina Ladino Puerto</h4>
-            <hr/>
+            <hr />
             <h5 style="margin-top:15px; margin-bottom:15px" class="card-subtitle font-weight-bold">Hardware and Software Dev</h5>
             <!--Text-->
-            <p style="margin-bottom:60px; text-align:justify" class="card-text">
+            <p style=" text-align:justify" class="card-text">
                 I'm a Automation and Robotics Engineer and Maker.
                 +5 years of experience making hardware and leading projects and teams.
             </p>
-            <hr />
             <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
             <div class="container-fluid" style="position:absolute; bottom:5px; text-align:center">
                 <a style="color:steelblue" href="https://www.linkedin.com/in/karobot/"><i class="fab fa-linkedin fa-3x"></i></a>
@@ -42,7 +43,6 @@
         </div>
 
     </div>
-    <!-- Card -->
     <!-- Card -->
     <div class="card mb-4 box-shadow">
 
@@ -69,38 +69,38 @@
     </div>
     <!-- Card -->
     <!-- Card -->
-    <div class="card mb-4 box-shadow">
+    <!-- Card -->
+    @foreach (var p in Model.Profiles)
+    {
+        <div class="card mb-4 box-shadow">
 
-        <!--Card image-->
-        <div class="view overlay">
-            <img class="card-img-top" src="https://media.licdn.com/dms/image/C4E03AQH4ENA8XkwXdQ/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=KMLlb_QK-DccG7U9nsAXecxrdqrw766RvihsMBb-yDk" alt="Card image cap">
-            <a href="#!">
-                <div class="mask rgba-white-slight"></div>
-            </a>
-        </div>
-
-        <!--Card content-->
-        <div class="card-body">
-
-            <!--Title-->
-            <h4 class="card-title">Manuel Alejandro Ordoñez</h4>
-            <hr/>
-            <h5 style="margin-top:15px; margin-bottom:15px" class="card-subtitle font-weight-bold">Hardware and Software Dev</h5>
-            <!--Text-->
-            <p style="margin-bottom:60px; text-align:justify" class="card-text">Automation Engineer who loves tech and cats. I love learning and acquiring new knowledge</p>
-            <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-            <div class="container-fluid" style="position:absolute; bottom:5px; text-align:center">
-                <a style="color:steelblue" href="https://www.linkedin.com/in/manuel-alejandro-ordoñez-846353a9/"><i class="fab fa-linkedin fa-3x"></i></a>
-                <a style="color:dodgerblue" href="https://www.facebook.com/manuelalejandro.ordonez1"><i class="fab fa-twitter fa-3x"></i></a>
-                <a style="color:darkblue" href="https://twitter.com/alejandro_322_"><i class="fab fa-facebook fa-3x"></i></a>
-                <a style="color:black" href="https://twitter.com/alejandro_322_"><i class="fab fa-instagram fa-3x"></i></a>
+            <!--Card image-->
+            <div class="view overlay">
+                <img class="card-img-top" src="https://media.licdn.com/dms/image/C4E03AQH4ENA8XkwXdQ/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=KMLlb_QK-DccG7U9nsAXecxrdqrw766RvihsMBb-yDk" alt="Card image cap">
+                <a href="#!">
+                    <div class="mask rgba-white-slight"></div>
+                </a>
             </div>
 
+            <!--Card content-->
+            <div class="card-body">
+
+                <!--Title-->
+                <h4 class="card-title">@p.Name</h4>
+                <hr />
+                <h5 style="margin-top:15px; margin-bottom:15px" class="card-subtitle font-weight-bold">@p.Occupation</h5>
+                <!--Text-->
+                <p style="text-align:justify" class="card-text">@p.Description</p>
+                <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+                <div class="container-fluid" style="position:absolute; bottom:5px; text-align:center">
+                    <a style="color:steelblue" href="@p.Linkedin"><i class="fab fa-linkedin fa-3x"></i></a>
+                    <a style="color:dodgerblue" href="@p.Twitter"><i class="fab fa-twitter fa-3x"></i></a>
+                    <a style="color:darkblue" href="@p.Facebook"><i class="fab fa-facebook fa-3x"></i></a>
+                    <a style="color:black" href="@p.Instagram"><i class="fab fa-instagram fa-3x"></i></a>
+                </div>
+            </div>
 
         </div>
-
-    </div>
-    <!-- Card -->
-
+    }
 </div>
 <!-- Card deck -->

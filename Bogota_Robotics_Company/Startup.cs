@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Bogota_Robotics_Company.Services;
 
 namespace Bogota_Robotics_Company
 {
@@ -33,6 +34,7 @@ namespace Bogota_Robotics_Company
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddSingleton<IProfileService, TestProfileService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

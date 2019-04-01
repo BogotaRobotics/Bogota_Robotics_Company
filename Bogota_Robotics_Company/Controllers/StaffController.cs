@@ -4,21 +4,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Bogota_Robotics_Company.Services;
 
 namespace Bogota_Robotics_Company.Controllers
 {
     public class StaffController : Controller
     {
-        // GET: Staff
-        public ActionResult Index()
+        private readonly IProfileService _profileService;
+        public StaffController(IProfileService profileService)
         {
+            _profileService = profileService;
+        }
+        // GET: Staff
+        public async Task<ActionResult> Index()
+        {
+            var items =await _profileService.GetAsyncProfiles();
             return View();
         }
 
         // GET: Staff/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Profile(string name)
         {
-            return View();
+            return View(name);
         }
 
         // GET: Staff/Create
