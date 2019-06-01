@@ -4,10 +4,31 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Bogota_Robotics_Company</title>
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #wrapper {
+            min-height: 100%;
+            min-width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .full-screen {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/lib/mdbootstrap/css/mdb.css"/>
-        <link rel="stylesheet" href="~/lib/font-awesome/css/all.css"/>
+        <link rel="stylesheet" href="~/lib/mdbootstrap/css/mdb.css" />
+        <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -21,7 +42,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
               asp-fallback-href="~/lib/fontawesome/css/all.min.cs"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
-              integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" 
+              integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
               crossorigin="anonymous">
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
@@ -29,7 +50,7 @@
 <body>
     <header>
         <!--Navbar -->
-        <nav class="mb-3 navbar navbar-expand-lg navbar-dark bg-dark border-bottom box-shadow">
+        <nav class="mb-3 navbar navbar-expand-lg navbar-dark bg-dark border-bottom box-shadow" style="margin-bottom:0">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Bogotá Robotics Company</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
                     aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,11 +75,9 @@
         </nav>
         <!--/.Navbar -->
     </header>
-    <div class="container">
+    <div class="container-fluid" style="padding:0; min-width:100%; min-height:100%">
         <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        @RenderBody()
     </div>
 
     <footer class="border-top footer text-muted">

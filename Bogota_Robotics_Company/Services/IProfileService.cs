@@ -9,5 +9,6 @@ namespace Bogota_Robotics_Company.Services
     public interface IProfileService
     {
         Task<List<Profile>> GetAsyncProfiles();
+        Task<Profile> GetProfile(string name);
     }
 }

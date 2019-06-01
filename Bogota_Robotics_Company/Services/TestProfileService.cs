@@ -8,15 +8,26 @@ namespace Bogota_Robotics_Company.Services
 {
     public class TestProfileService : IProfileService
     {
-        public Task<List<Profile>> GetAsyncProfiles()
+        public TestProfileService()
         {
-            List<Profile> list = new List<Profile>
+            listProfiles = new List<Profile>
             {
                 new Profile{Name="Karolina Ladino", Description="Whatever"},
                 new Profile{Name="Karolina Ladino", Description="Whatever"},
                 new Profile{Name="Karolina Ladino", Description="Whatever"}
             };
-            return Task.FromResult(list);
+        }
+        private List<Profile> listProfiles { get; set; }
+        public Task<List<Profile>> GetAsyncProfiles()
+        {
+           
+            return Task.FromResult(listProfiles);
+        }
+
+        public Task<Profile> GetProfile(string name)
+        {
+            var x = listProfiles.Where(q => q.Name == name).FirstOrDefault();
+            return Task.FromResult(x);
         }
     }
 }

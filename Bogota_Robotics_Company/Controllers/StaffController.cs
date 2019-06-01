@@ -20,7 +20,7 @@ namespace Bogota_Robotics_Company.Controllers
         public async Task<ActionResult> Index()
         {
             var items =await _profileService.GetAsyncProfiles();
-            var model = new ProfileViewModel()
+            var model = new StaffViewModel()
             {
                 Profiles = items
             };
@@ -28,9 +28,11 @@ namespace Bogota_Robotics_Company.Controllers
         }
 
         // GET: Staff/Details/5
-        public ActionResult Profile(string name)
+        public async Task<ActionResult> Profile(string name)
         {
-            return View(name);
+            var p = await _profileService.GetProfile(name);
+            var model = new ProfileViewModel() { Profile = p };
+            return View(model);
         }
 
         // GET: Staff/Create

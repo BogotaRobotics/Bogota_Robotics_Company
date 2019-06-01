@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace Bogota_Robotics_Company.Models
 {
-    public class ProfileViewModel
+    public class StaffViewModel
     {
-        public Profile Profile { get; set; }
-
+        public List<Profile> Profiles { get; set; }
     }
 }
