@@ -2,16 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
-namespace Bogota_Robotics_Company.Models
+namespace Bogota_Robotics_Company.Data.Entities
 {
     public class BasicData
     {
         public int ID { get; set; }
+        [Required]
         public string Name { get; set; }
-        public DateTime Date { get; set; }
+        [Required]
+        public DateTime DateStarted { get; set; }
+        [Required]
+        public DateTime DateFinished { get; set; }
+        [Required]
         public string Description { get; set; }
+        [Required]
         public string DetailedDescription { get; set; }
-
     }
 }
