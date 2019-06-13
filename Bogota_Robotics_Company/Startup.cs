@@ -12,11 +12,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Bogota_Robotics_Company.Data;
 using Microsoft.EntityFrameworkCore;
 using Bogota_Robotics_Company.Data.Repositories;
+using System.Data.SqlClient;
 
 namespace Bogota_Robotics_Company
 {
     public class Startup
     {
+        private string _connection;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -39,7 +42,12 @@ namespace Bogota_Robotics_Company
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddDbContext<DataContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DbApplication")));
+            var builder = new SqlConnectionStringBuilder(
+                
+            Configuration.GetConnectionString("Movies"));
+            builder.Password = Configuration["DbPassword"];
+            _connection = builder.ConnectionString;
+            services.AddDbContext<DataContext>(option => option.UseSqlServer(_connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
