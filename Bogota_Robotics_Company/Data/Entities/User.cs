@@ -10,7 +10,7 @@ namespace Bogota_Robotics_Company.Data.Entities
     {
         public string Occupation { get; set; }
         public string Photo { get; set; }
-        public string Phone { get; set; }
+        public string OtherPhone { get; set; }
         public int Age { get; set; }
         public string Tastes { get; set; }
         public string About { get; set; }

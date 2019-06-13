@@ -6,9 +6,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Bogota_Robotics_Company.Data.Entities
 {
-    public class Experience
+    public class Experience:IEntity
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         [Required]
         public string CompanyName { get; set; }
         [Required]

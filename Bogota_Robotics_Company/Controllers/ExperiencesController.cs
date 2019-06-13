@@ -6,23 +6,28 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bogota_Robotics_Company.Data;
+using Bogota_Robotics_Company.Data.Repositories;
 using Bogota_Robotics_Company.Data.Entities;
+using Bogota_Robotics_Company.Helpers;
 
 namespace Bogota_Robotics_Company.Controllers
 {
     public class ExperiencesController : Controller
     {
-        private readonly DataContext _context;
+        private readonly IExperienceRepository repository;
+        private readonly IUserHelper userHelper;
 
-        public ExperiencesController(DataContext context)
+        //TODO: Change datacontext by an interface
+        public ExperiencesController(IExperienceRepository repository, IUserHelper userHelper)
         {
-            _context = context;
+            this.repository = repository;
+            this.userHelper = userHelper;
         }
 
         // GET: Experiences
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Experiences.ToListAsync());
+            return View(repository.GetAll());
         }
 
         // GET: Experiences/Details/5
@@ -33,8 +38,7 @@ namespace Bogota_Robotics_Company.Controllers
                 return NotFound();
             }
 
-            var experience = await _context.Experiences
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var experience = await repository.GetByIdAsync(id);
             if (experience == null)
             {
                 return NotFound();
@@ -54,12 +58,11 @@ namespace Bogota_Robotics_Company.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,CompanyName,StartDate,EndDate,Ocupation")] Experience experience)
+        public async Task<IActionResult> Create(Experience experience)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(experience);
-                await _context.SaveChangesAsync();
+                await repository.CreateAsync(experience);
                 return RedirectToAction(nameof(Index));
             }
             return View(experience);
@@ -73,7 +76,7 @@ namespace Bogota_Robotics_Company.Controllers
                 return NotFound();
             }
 
-            var experience = await _context.Experiences.FindAsync(id);
+            var experience = await repository.GetByIdAsync(id);
             if (experience == null)
             {
                 return NotFound();
@@ -88,7 +91,7 @@ namespace Bogota_Robotics_Company.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,CompanyName,StartDate,EndDate,Ocupation")] Experience experience)
         {
-            if (id != experience.ID)
+            if (id != experience.Id)
             {
                 return NotFound();
             }
@@ -97,12 +100,11 @@ namespace Bogota_Robotics_Company.Controllers
             {
                 try
                 {
-                    _context.Update(experience);
-                    await _context.SaveChangesAsync();
+                    await repository.UpdateAsync(experience);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ExperienceExists(experience.ID))
+                    if (!await repository.ExistAsync(id)) 
                     {
                         return NotFound();
                     }
@@ -124,8 +126,8 @@ namespace Bogota_Robotics_Company.Controllers
                 return NotFound();
             }
 
-            var experience = await _context.Experiences
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var experience = await repository.GetAll()
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (experience == null)
             {
                 return NotFound();
@@ -139,15 +141,9 @@ namespace Bogota_Robotics_Company.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var experience = await _context.Experiences.FindAsync(id);
-            _context.Experiences.Remove(experience);
-            await _context.SaveChangesAsync();
+            var experience = await repository.GetByIdAsync(id);
+            await repository.DeleteAysnc(experience);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool ExperienceExists(int id)
-        {
-            return _context.Experiences.Any(e => e.ID == id);
         }
     }
 }

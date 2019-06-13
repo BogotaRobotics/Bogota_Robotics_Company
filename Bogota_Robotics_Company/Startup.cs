@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Bogota_Robotics_Company.Data;
+using Bogota_Robotics_Company.Data.Repositories;
+using Bogota_Robotics_Company.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Bogota_Robotics_Company.Data;
-using Microsoft.EntityFrameworkCore;
-using Bogota_Robotics_Company.Data.Repositories;
 using System.Data.SqlClient;
 
 namespace Bogota_Robotics_Company
@@ -36,18 +32,24 @@ namespace Bogota_Robotics_Company
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
-            services.AddScoped<IExperience, ExperienceRepository>();
+            services.AddScoped<IExperienceRepository, ExperienceRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IProjectRepository, ProjectRepository>();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             var builder = new SqlConnectionStringBuilder(
-                
+
             Configuration.GetConnectionString("Movies"));
             builder.Password = Configuration["DbPassword"];
             _connection = builder.ConnectionString;
             services.AddDbContext<DataContext>(option => option.UseSqlServer(_connection));
+
+
+            //Repositories
+
+            services.AddScoped<IUserHelper, UserHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

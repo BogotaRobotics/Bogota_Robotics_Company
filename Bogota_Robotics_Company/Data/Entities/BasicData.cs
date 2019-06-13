@@ -8,13 +8,10 @@ namespace Bogota_Robotics_Company.Data.Entities
 {
     public class BasicData
     {
-        public int ID { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
         public DateTime DateStarted { get; set; }
-        [Required]
-        public DateTime DateFinished { get; set; }
         [Required]
         public string Description { get; set; }
         [Required]

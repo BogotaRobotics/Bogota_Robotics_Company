@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace Bogota_Robotics_Company.Data.Entities
 {
-    public class Post:BasicData, IEntity
+    public interface IEntity
     {
-        public string YouTubeVideo { get; set; }
-        public User User { get; set; }
-        public int Id { get; set; }
+        int Id { get; set; }
+
     }
 }
